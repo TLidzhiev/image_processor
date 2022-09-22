@@ -8,7 +8,7 @@
 24-битный BMP без сжатия и без таблицы цветов. Тип используемого `DIB header` - `BITMAPINFOHEADER`.
 
 Пример файла в нужном формате есть в статье на Википедии [в разделе "Example 1"](https://en.wikipedia.org/wiki/BMP_file_format#Example_1)
-и в папке [examples](examples).
+и в папке [examples](https://github.com/Tlidzhiev/image_processor/tree/main/examples).
 
 При тестировании обязательно обращайте внимание на то, чтобы тестовое изображение
 было сохранено именно в 24-битном BMP.
