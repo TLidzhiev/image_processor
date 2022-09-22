@@ -48,13 +48,6 @@ class Image {
 public:
     Image() = default;
 
-    [[nodiscard]] size_t GetWidth() const;
-
-    [[nodiscard]] size_t GetHeight() const;
-
-    [[nodiscard]] Color GetColor(size_t i, size_t j) const;
-
-    void SetColor(size_t i, size_t j, Color newPixel);
 
     void ReadImage(const std::string& input_file_name);
 

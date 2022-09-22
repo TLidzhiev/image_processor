@@ -33,24 +33,6 @@ void WriteColor(std::ostream& out, const Color& color) {
     WriteByte(out, color.red);
 }
 
-size_t Image::GetWidth() const {
-    return width_;
-}
-
-size_t Image::GetHeight() const {
-    return height_;
-}
-
-Color Image::GetColor(size_t i, size_t j) const {
-    if (i < height_ && j < width_) {
-        return pixels_[i][j];
-    }
-    return {};
-}
-
-void Image::SetColor(size_t i, size_t j, Color newPixel) {
-    pixels_[i][j] = newPixel;
-}
 
 void Image::ReadImage(const std::string& input_file_name) {
     std::ifstream input(input_file_name, std::ios::binary);

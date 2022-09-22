@@ -16,7 +16,7 @@ Crop::Crop(const std::vector<std::string>& filter_arguments) {
 }
 
 void Crop::ApplyFilter(Image& image) const {
-    if (width_ > image.GetWidth() || height_ > image.GetHeight()) {
+    if (width_ > image.width_ || height_ > image.height_) {
         throw std::invalid_argument("Crop arguments > image size");
     }
     image.pixels_.resize(height_);
@@ -29,34 +29,35 @@ void Crop::ApplyFilter(Image& image) const {
 
 
 void Grayscale::ApplyFilter(Image& image) const {
-    for (size_t i = 0; i < image.GetHeight(); ++i) {
-        for (size_t j = 0; j < image.GetWidth(); ++j) {
-            Color current_pixel = image.GetColor(i, j);
+    for (size_t i = 0; i < image.height_; ++i) {
+        for (size_t j = 0; j < image.width_; ++j) {
+            Color current_pixel = image.pixels_[i][j];
             auto newColor = static_cast<uint8_t>(current_pixel.red * red +
                                                  current_pixel.green * green +
-                                                 current_pixel.blue * blue);
+                                                 current_pixel.blue * blue
+            );
 
             current_pixel.red = newColor;
             current_pixel.green = newColor;
             current_pixel.blue = newColor;
 
-            image.SetColor(i, j, current_pixel);
+            image.pixels_[i][j] = current_pixel;
         }
     }
 }
 
 void Negative::ApplyFilter(Image& image) const {
-    size_t height = image.GetHeight();
-    size_t width = image.GetWidth();
+    size_t height = image.height_;
+    size_t width = image.width_;
 
     for (size_t i = 0; i < height; ++i) {
         for (size_t j = 0; j < width; ++j) {
-            Color current_pixel = image.GetColor(i, j);
+            Color current_pixel = image.pixels_[i][j];
             current_pixel.red = MAX_COLOR_VALUE - current_pixel.red;
             current_pixel.green = MAX_COLOR_VALUE - current_pixel.green;
             current_pixel.blue = MAX_COLOR_VALUE - current_pixel.blue;
 
-            image.SetColor(i, j, current_pixel);
+            image.pixels_[i][j] = current_pixel;
         }
     }
 }
